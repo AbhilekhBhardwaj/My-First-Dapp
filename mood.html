@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            test-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        div {
+            width: 20%;
+            margin: 0 auto;
+            display:flex;
+            flex-direction: column;
+        }
+        button {
+            width: 100%;
+            margin: 10px 0px 5px 0px;
+        }
+    </style>
+</head>
+<body>
+    <h1>This is my dapp!</h1>
+    <p>Here we can get or setmood</p>
+    <label for="mood">Input Mood:</label><br>
+    <input type="text" id="mood">
+    <div>
+        <button onclick="getMood()">Get Mood</button>
+        <button onclick="setMood()">Set Mood</button>
+    </div>
+</body>
+<script>
+charset="utf-8"
+src="https://cdn.ethers.io/scripts/ethers-v4.min.js"
+type="test/javascript"
+></script>
+<script>
+    windows.ethereum.enable();
+    var provider = new ethers.providers.Web3Provider(
+        web3.currentProvider,
+        "ropsten"
+    );
+    var MoodContractAddress ="0xB73a6Cdc48C911a7f08a4E3AA76B3e3A140b11f0";
+    var MoodContractABI = [
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_mood",
+				"type": "string"
+			}
+		],
+		"name": "setMood",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getMood",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+];
+    var MoodContract;
+    var signer;
+    provider.listAccount().then(function(accounts){
+        signer= provider.getSigner(accounts[0]);
+        MoodContractAddress,
+        MoodContractABI,
+        signer
+    );
+    });
+    async function getMood(){
+        getMoodPromise = Moodcontract.getMood();
+        var Mood = await getMoodPromise;
+        console.log(Mood);
+    }
+    async function setMood() {
+        let Mood = document.getElementById("mood").value;
+        setMoodpromise = MoodContract.setMood(mood);
+        await setMoodPromise;
+    }
+</script>
+</html>
